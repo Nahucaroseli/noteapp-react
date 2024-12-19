@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import NoteCard from '../components/NoteCard'
 import useNotes from '../hooks/useNotes';
+import CreateForm from '../components/CreateForm';
 
 function Notes() {
 
@@ -17,8 +18,9 @@ function Notes() {
   return (
     <>
     <Navbar />
-    <div className='container flex flex-col mt-10 text-white ml-6 gap-y-10'>
-        <h1 className=' text-4xl font-mono font-bold'><i>NOTES</i></h1>
+    <CreateForm></CreateForm>
+    <div className='flex flex-col mt-10 text-black ml-6 gap-y-10'>
+        <h1 className=' text-4xl font-mono font-bold'><i>Notes</i></h1>
         <div className='flex flex-row flex-wrap gap-x-5 gap-y-5'>
             {HTMLNotes}
         </div>
