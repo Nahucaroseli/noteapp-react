@@ -11,7 +11,6 @@ function useNotes() {
                 const response = await getNotes();
                 const data = response;
                 setNotes(data);
-                console.log(data);
             } catch (error) {   
                 console.log("Error",error);
             }
@@ -19,8 +18,8 @@ function useNotes() {
         fetchProducts();
 
     },[]);
-
-    return notes;
+    console.log(notes);
+    return [notes,setNotes];
 }
 
 export default useNotes

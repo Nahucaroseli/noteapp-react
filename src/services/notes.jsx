@@ -10,3 +10,17 @@ export const getNotes = async ()=>{
             console.log(error);
     }
 };
+
+
+
+export const addToNotes = async (newNote)=>{
+    try {
+        fetch(API+"/",{
+            method: 'POST',
+            headers:{"Content-type": "application/json;"},
+            body: JSON.stringify(newNote)
+        })
+    } catch (error) {
+            console.log(error);
+    }
+};
