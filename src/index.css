@@ -10,3 +10,8 @@
 .activeCreateForm{
   visibility:visible;
 }
+
+.note_icons{
+  position: relative;
+  bottom: -6.5rem;
+}

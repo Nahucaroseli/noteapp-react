@@ -24,3 +24,14 @@ export const addToNotes = async (newNote)=>{
             console.log(error);
     }
 };
+
+export const deleteFromNotes = async (noteId)=>{
+    try {
+        fetch(API+"/"+noteId,{
+            method: 'DELETE',
+            headers:{"Content-type": "application/json;"},
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
