@@ -29,7 +29,7 @@ function CreateForm() {
 
 
   return (
-    <div id='createform' className="fixed inset-0 flex items-center justify-center notActiveCreateForm">
+    <div id='createform' className="fixed inset-0 flex items-center justify-center notActiveCreateForm z-10">
         <form onSubmit={(e)=>{ handleSubmit(e);} } className="h-2/3 w-80 bg-slate-300 text-black flex flex-col gap-y-5 items-center justify-center rounded-md shadow-lg">
             <i onClick={toggleCreateForm} className="fa-solid fa-xmark relative top-2 left-32 hover:cursor-pointer"></i>
             <h1 className='text-2xl  mb-10'>Agregar Nota</h1>

@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 
+body{
+  background-color: rgb(255, 255, 255);
+}
+
 .notActiveCreateForm{
   visibility: hidden;
 }
@@ -13,5 +17,5 @@
 
 .note_icons{
   position: relative;
-  bottom: -6.5rem;
+  top: -.5rem;
 }
