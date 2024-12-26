@@ -11,6 +11,18 @@ export const getNotes = async ()=>{
     }
 };
 
+export const getNoteById = async (id)=>{
+
+    try {
+        const response = await fetch(API+"/notes/"+id);
+        const data = response.json();
+        console.log(id);
+        return data;
+    } catch (error) {
+            console.log(error);
+    }
+};
+
 
 
 export const addToNotes = async (newNote)=>{

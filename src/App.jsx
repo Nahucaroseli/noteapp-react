@@ -5,6 +5,7 @@ import './App.css'
 import Navbar from './components/Navbar'
 import { Route, Router, Routes } from 'react-router'
 import Notes from './pages/Notes'
+import NoteDetails from './pages/NoteDetails'
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
     
    <Routes>
       <Route path='/' element={<Notes></Notes>}></Route>
+      <Route path='/notes/:id' element={<NoteDetails></NoteDetails>}></Route>
    </Routes>
 
   )

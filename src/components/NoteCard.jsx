@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { NoteContext } from '../context/note.context';
+import { Link } from 'react-router';
 
 function NoteCard(props) {
 
@@ -12,6 +13,7 @@ function NoteCard(props) {
   }
 
   return (
+    <Link to={`/notes/${props.noteCard.id}` }>
     <div className='flex flex-col bg-orange-300 w-60 h-60 gap-y-4 text-black rounded-2xl ease-out duration-300 hover:shadow cursor-pointer hover:shadow-xl'>
         <h1 className='text-xl ml-3 mt-4 font-bold'>{props.noteCard.title}</h1>
         <h1 className='text-xl ml-3 w-48 h-60 overflow-hidden ... font-bold'>{props.noteCard.description}</h1>
@@ -21,6 +23,7 @@ function NoteCard(props) {
           <i className="fa-solid fa-box-archive hover:cursor-pointer"></i>
         </div>
     </div>
+    </Link>
   )
 }
 
