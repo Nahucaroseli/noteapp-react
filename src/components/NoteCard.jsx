@@ -4,12 +4,17 @@ import { Link } from 'react-router';
 
 function NoteCard(props) {
 
-  const {removeNote} = useContext(NoteContext);
+  const {removeNote,archiveNote} = useContext(NoteContext);
 
 
   const handleDelete = (e,id) =>{ 
       e.preventDefault();
       removeNote(id);
+  }
+
+  const handleArchive = (e,id) =>{
+      e.preventDefault();
+      archiveNote(id);
   }
 
   return (
@@ -20,7 +25,7 @@ function NoteCard(props) {
         <div className='flex flex row gap-x-2 text-xl ml-3 left-36 note_icons'>
           <i onClick={(e)=>{handleDelete(e,props.noteCard.id);}} className="fa-solid fa-trash hover:cursor-pointer"></i>
           <i className="fa-solid fa-pen-to-square hover:cursor-pointer"></i>
-          <i className="fa-solid fa-box-archive hover:cursor-pointer"></i>
+          <i onClick={(e) =>{handleArchive(e,props.noteCard.id);}} className="fa-solid fa-box-archive hover:cursor-pointer"></i>
         </div>
     </div>
     </Link>

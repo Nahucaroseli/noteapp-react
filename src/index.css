@@ -16,6 +16,7 @@ body{
 }
 
 .note_icons{
+  width: 50px;
   position: relative;
   top: -.5rem;
 }

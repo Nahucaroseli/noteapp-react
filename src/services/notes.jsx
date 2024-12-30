@@ -47,3 +47,16 @@ export const deleteFromNotes = async (noteId)=>{
         console.log(error);
     }
 }
+
+
+export const archiveExistingNote = async (note)=>{
+    try {
+        fetch(API+"/"+note.id,{
+            method: 'PUT',
+            headers:{"Content-type": "application/json;"},
+            body: JSON.stringify(note)
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}

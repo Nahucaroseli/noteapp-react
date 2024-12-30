@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import { Route, Router, Routes } from 'react-router'
 import Notes from './pages/Notes'
 import NoteDetails from './pages/NoteDetails'
+import ArchivedNotes from './pages/ArchivedNotes'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
    <Routes>
       <Route path='/' element={<Notes></Notes>}></Route>
       <Route path='/notes/:id' element={<NoteDetails></NoteDetails>}></Route>
+      <Route path='/archived' element={<ArchivedNotes></ArchivedNotes>}></Route>
    </Routes>
 
   )
