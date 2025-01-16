@@ -11,9 +11,10 @@ body{
   visibility: hidden;
 }
 
-.activeCreateForm{
+.activeCreateForm,.activeEditForm {
   visibility:visible;
 }
+
 
 .note_icons{
   width: 50px;

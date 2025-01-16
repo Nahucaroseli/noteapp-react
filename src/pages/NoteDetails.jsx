@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import { useParams } from 'react-router'
+import { Link, useParams } from 'react-router'
 import useNote from '../hooks/useNote';
 
 function NoteDetails() {
@@ -12,7 +12,10 @@ function NoteDetails() {
 
   return (
     <>
-        <Navbar/>
+        <Link to={"/"} className='text-xl ml-5 mt-5'>
+        <i className="fa-solid fa-arrow-left mt-5 mr-2"></i>
+          Volver
+        </Link>
         {note &&
         <div className='flex flex-col mt-10 text-black ml-6 gap-y-10'>
           <h1 className=' text-4xl font-mono font-bold'>{note.title}</h1>
@@ -21,7 +24,6 @@ function NoteDetails() {
           </div>
         </div>
         }
-        
     </>
 
   )

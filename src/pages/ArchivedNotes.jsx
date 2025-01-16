@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { NoteContext } from '../context/note.context';
 import NoteCard from '../components/NoteCard';
+import { Link } from 'react-router';
 
 function ArchivedNotes() {
 
@@ -23,6 +24,10 @@ function ArchivedNotes() {
 
   return (
     <>
+    <Link to={"/"} className='text-xl ml-5 mt-5'>
+        <i className="fa-solid fa-arrow-left mt-5 mr-2"></i>
+          Volver
+    </Link>
     <div className='flex flex-col mt-10 text-black ml-6 gap-y-10 overflow-hidden'>
         <h1 className=' text-4xl font-mono font-bold'>Archived notes</h1>
         <div className='flex flex-row flex-wrap gap-x-5 gap-y-5'>

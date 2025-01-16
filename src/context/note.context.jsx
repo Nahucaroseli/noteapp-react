@@ -31,7 +31,12 @@ function NoteContextWrapper(props) {
     const archiveNote = async (noteId) =>{
           const updatedNotes = notes.map((value)=>{
             if(noteId=== value.id){
-              return {...value,archived:true};
+              if(value.archived == false){
+                return {...value,archived:true};
+              } 
+              else if(value.archived == true){
+                return {...value,archived:false};
+              }
             }else{
               return value;
             }
