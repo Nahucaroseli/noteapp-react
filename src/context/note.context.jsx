@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import useNotes from '../hooks/useNotes';
-import { addToNotes, archiveExistingNote, deleteFromNotes } from '../services/notes';
+import { addToNotes, updateNote, deleteFromNotes } from '../services/notes';
 
 const NoteContext = createContext();
 
@@ -27,6 +27,21 @@ function NoteContextWrapper(props) {
       }
       
       };
+
+    const editNote = async(newNote) => {
+      const updateNotes = notes.map((value)=>{
+        if(newNote.id == value.id){
+          return newNote;
+        }else{
+          return value;
+        }
+      })
+      setNotes(updateNotes);
+      const note = updateNotes.find(value => value.id === newNote.id);
+      if(note){
+        await updateNote(note);
+      }
+    }
     
     const archiveNote = async (noteId) =>{
           const updatedNotes = notes.map((value)=>{
@@ -44,14 +59,14 @@ function NoteContextWrapper(props) {
           setNotes(updatedNotes);
           const note = updatedNotes.find(value => value.id === noteId);
           if(note){
-            await archiveExistingNote(note);
+            await updateNote(note);
           }
     };
 
 
 
   return (
-    <NoteContext.Provider value={{notes,setNotes,addNote,removeNote,archiveNote}}>
+    <NoteContext.Provider value={{notes,setNotes,addNote,removeNote,archiveNote,editNote}}>
         {props.children}
     </NoteContext.Provider>
   )

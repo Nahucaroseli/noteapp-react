@@ -49,7 +49,7 @@ export const deleteFromNotes = async (noteId)=>{
 }
 
 
-export const archiveExistingNote = async (note)=>{
+export const updateNote = async (note)=>{
     try {
         fetch(API+"/"+note.id,{
             method: 'PUT',
