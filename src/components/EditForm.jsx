@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NoteContext } from '../context/note.context';
 import { useParams } from 'react-router';
 
@@ -9,6 +9,15 @@ const {id} = useParams();
 const {notes,editNote} = useContext(NoteContext);
 const [title,setTitle] = useState("");
 const [description,setDescription] = useState("");
+
+
+useEffect(()=>{
+  const note = notes.find(n => n.id == id);
+  if(note){
+    setTitle(note.title);
+    setDescription(note.description);
+  }
+},[])
 
 
 const handleSubmit =  (e)=> {

@@ -8,23 +8,25 @@ function ArchivedNotes() {
     const {notes} = useContext(NoteContext);
     const [HTMLNotes,setHTMLNotes] = useState("");
 
-
     useEffect(()=>{
-        const html = notes.map((note)=>{
-            if(note.archived){
-                return (
-                    <NoteCard key={note.id} noteCard={note}></NoteCard>
-                );
-            }
-
-        })
-        setHTMLNotes(html);
+        let html = notes
+        .filter(note => note.archived) 
+        .map(note => (
+            <NoteCard key={note.id} noteCard={note}></NoteCard>
+        ));
+        console.log(html);
+        if(html.length === 0){
+            setHTMLNotes(<h1 className='font-bold'>You don't have any archived notes</h1>);
+        }else{
+            setHTMLNotes(html);
+        }
+        
     },[notes])
 
 
   return (
     <>
-    <Link to={"/"} className='text-xl ml-5 mt-5'>
+    <Link to={"/notes"} className='text-xl ml-5 mt-5'>
         <i className="fa-solid fa-arrow-left mt-5 mr-2"></i>
           Volver
     </Link>
