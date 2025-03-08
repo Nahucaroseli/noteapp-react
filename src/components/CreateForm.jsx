@@ -13,9 +13,9 @@ function CreateForm() {
     form.classList.remove("activeCreateForm")
     e.preventDefault();
       const newNote = {
-        id: notes.length+1,
         title: title,
-        description: description
+        description: description,
+        usuario_id: 1
       }
 
       addNote(newNote);

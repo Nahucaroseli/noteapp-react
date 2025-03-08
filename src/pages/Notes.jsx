@@ -14,15 +14,17 @@ function Notes() {
 
 
     useEffect(()=>{
-        const html = notes
-        .filter(note => !note.archived) 
-        .map(note => (
-            <NoteCard key={note.id} noteCard={note}></NoteCard>
-        ));
-        if(html.length === 0){
-            setHTMLNotes(<h1 className='font-bold'>You don't have any notes</h1>);
-        }else{
-            setHTMLNotes(html);
+        if(notes){
+            const html = notes
+            .filter(note => !note.archived) 
+            .map((note) => (
+                <NoteCard key={note.id} noteCard={note}></NoteCard>
+            ));
+            if(html.length === 0){
+                setHTMLNotes(<h1 className='font-bold'>You don't have any notes</h1>);
+            }else{
+                setHTMLNotes(html);
+            }
         }
     },[notes])
 

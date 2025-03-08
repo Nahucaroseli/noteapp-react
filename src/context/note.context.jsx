@@ -13,8 +13,10 @@ function NoteContextWrapper(props) {
 
 
     const addNote = async (newNote) =>{
-        addToNotes(newNote);
-        setNotes([...notes,newNote]);
+       const note = await addToNotes(newNote);
+       if(note){
+        setNotes([...notes,note]);
+       }
     };
 
     const removeNote = async (noteId) =>{

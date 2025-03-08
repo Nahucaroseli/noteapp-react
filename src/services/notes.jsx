@@ -27,11 +27,12 @@ export const getNoteById = async (id)=>{
 
 export const addToNotes = async (newNote)=>{
     try {
-        fetch(API+"/",{
+        const note = await fetch(API+"/notes",{
             method: 'POST',
             headers:{"Content-type": "application/json;"},
             body: JSON.stringify(newNote)
         })
+        return note.json();
     } catch (error) {
             console.log(error);
     }
@@ -39,7 +40,7 @@ export const addToNotes = async (newNote)=>{
 
 export const deleteFromNotes = async (noteId)=>{
     try {
-        fetch(API+"/"+noteId,{
+        fetch(API+"/notes/"+noteId,{
             method: 'DELETE',
             headers:{"Content-type": "application/json;"},
         })
@@ -51,7 +52,7 @@ export const deleteFromNotes = async (noteId)=>{
 
 export const updateNote = async (note)=>{
     try {
-        fetch(API+"/"+note.id,{
+        fetch(API+"/notes/"+note.id,{
             method: 'PUT',
             headers:{"Content-type": "application/json;"},
             body: JSON.stringify(note)
