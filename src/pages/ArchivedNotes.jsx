@@ -26,7 +26,7 @@ function ArchivedNotes() {
 
   return (
     <>
-    <Link to={"/notes"} className='text-xl ml-5 mt-5'>
+    <Link to={"/"} className='text-xl ml-5 mt-5'>
         <i className="fa-solid fa-arrow-left mt-5 mr-2"></i>
           Volver
     </Link>

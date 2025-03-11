@@ -1,13 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 function Navbar() {
 
+
+    const navigate = useNavigate();
 
 
   const toggleCreateForm = ()=>{
     let form = document.querySelector("#createform");
     form.classList.add('activeCreateForm');
+  }
+
+
+  const handleLogout =()=>{
+    localStorage.removeItem("username");
+    navigate("/login");
   }
 
   return (
@@ -24,9 +32,9 @@ function Navbar() {
           </div>
 
             
-            <Link to={"/"}>
-              <i className="fa-solid fa-right-from-bracket mt-3 mr-2"></i>
-            </Link>
+
+            <i onClick={handleLogout} className="fa-solid fa-right-from-bracket mt-4 mr-2 hover:cursor-pointer"></i>
+
         </div>
     </nav>
   )

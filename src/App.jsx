@@ -14,8 +14,8 @@ function App() {
   return (
     
    <Routes>
-      <Route path='/' element={<Authentication></Authentication>}></Route>
-      <Route path='/notes' element={<Notes></Notes>}></Route>
+      <Route path='/' element={<Notes></Notes>}></Route>
+      <Route path='/login' element={<Authentication></Authentication>}></Route>
       <Route path='/notes/:id' element={<NoteDetails></NoteDetails>}></Route>
       <Route path='/archived' element={<ArchivedNotes></ArchivedNotes>}></Route>
    </Routes>

@@ -5,15 +5,23 @@ import useNotes from '../hooks/useNotes';
 import CreateForm from '../components/CreateForm';
 import { NoteContext } from '../context/note.context';
 import EditForm from '../components/EditForm';
+import { useNavigate } from 'react-router';
 
 
 function Notes() {
 
     const {notes} = useContext(NoteContext);
     const [HTMLNotes,setHTMLNotes] = useState("");
+    const navigate = useNavigate();
 
 
     useEffect(()=>{
+        const user = localStorage.getItem("username");
+        if(user == null){
+            navigate("/login");
+        }
+
+
         if(notes){
             const html = notes
             .filter(note => !note.archived) 
