@@ -34,7 +34,7 @@ function Notes() {
     <Navbar />
     <CreateForm></CreateForm>
     <div className='flex flex-col mt-10 text-black ml-6 gap-y-10 overflow-hidden'>
-        <h1 className=' text-4xl font-mono font-bold'>Notes</h1>
+        <h1 className=' text-5xl font-mono font-bold'>Notes</h1>
         <div className='flex flex-row flex-wrap gap-x-5 gap-y-5'>
             {HTMLNotes}
         </div>

@@ -1,4 +1,4 @@
-const API = 'https://noteapp-nahucaroseli.koyeb.app';
+const API = import.meta.env.VITE_API;
 
 
 export const getNotes = async ()=>{
