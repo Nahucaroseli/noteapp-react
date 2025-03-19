@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router';
+import { UsuarioContext } from '../context/usuario.context';
 
 function Navbar() {
 
-
+    const {logoutUser} = useContext(UsuarioContext);
     const navigate = useNavigate();
 
 
@@ -15,6 +16,9 @@ function Navbar() {
 
   const handleLogout =()=>{
     localStorage.removeItem("username");
+    localStorage.removeItem("user_id");
+    logoutUser();
+
     navigate("/login");
   }
 

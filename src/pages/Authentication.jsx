@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router';
-import { logIn } from '../services/users';
+import { logIn , signIn} from '../services/users';
+import { UsuarioContext } from '../context/usuario.context';
 
 function Authentication() {
 
-
+    const {setNewUser} = useContext(UsuarioContext);
     const [username, setUserName] = useState("");
     const [password, setPass] = useState("");
     const [usernameRegister, setUserNameRegister] = useState("");
@@ -12,6 +13,25 @@ function Authentication() {
 
 
     const navigate = useNavigate();
+
+
+    const submitRegister = async()=>{
+      const userRegistered = {
+        username:usernameRegister,
+        password:passwordRegister
+      }
+
+      const user = await signIn(userRegistered);
+      const newUser = JSON.parse(JSON.stringify(user));
+      if(newUser.username == userRegistered.username){
+        localStorage.setItem("username",usernameRegister);
+        localStorage.setItem("user_id",newUser.id)
+        setNewUser();
+
+        navigate("/")
+      }
+
+    }
 
 
     const submitLogin = async ()=>{
@@ -23,6 +43,8 @@ function Authentication() {
          const userJson = JSON.parse(JSON.stringify(user));
          if(userJson.username == userLogin.username){
             localStorage.setItem("username",username);
+            localStorage.setItem("user_id",userJson.id)
+            setNewUser();
             navigate("/");
          }
     }

@@ -7,15 +7,15 @@ function CreateForm() {
   const [description,setDescription] = useState("");
   const {notes,addNote} = useContext(NoteContext);
 
-
   const handleSubmit =  (e)=> {
     let form = document.querySelector("#createform")
     form.classList.remove("activeCreateForm")
+    const user_id = localStorage.getItem("user_id");
     e.preventDefault();
       const newNote = {
         title: title,
         description: description,
-        usuario_id: 1
+        usuario_id: user_id
       }
 
       addNote(newNote);

@@ -2,8 +2,9 @@ const API = import.meta.env.VITE_API;
 
 
 export const getNotes = async ()=>{
+    const user_id = localStorage.getItem("user_id");
     try {
-        const response = await fetch(API+"/notes");
+        const response = await fetch(API+"/users/"+user_id+"/notes");
         const data = response.json();
         return data;
     } catch (error) {
