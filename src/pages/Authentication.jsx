@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { logIn , signIn} from '../services/users';
 import { UsuarioContext } from '../context/usuario.context';
 
@@ -52,6 +52,7 @@ function Authentication() {
 
 
   return (
+    <>
     <div className='container flex flex-col pt-32 w-screen gap-y-10 lg:flex-row gap-x-16 justify-right overflow-hidden'>
             <div className='flex flex-col ml-5 gap-y-10 w-full'>
               <h1 className='text-xl font-bold'>Iniciar Sesion</h1>
@@ -74,7 +75,13 @@ function Authentication() {
                   <input value={passwordRegister} onChange={(e)=>{setPassRegister(e.target.value)}} className='border border-black p-2' type="password"/><button type='submit' className=' mt-10 border-2 border-black p-2 rounded-lg w-60 text-white bg-black hover:bg-white hover:text-black ease-out duration-300 '>Registrarse</button>
               </form>
             </div>
+
           </div>
+          <div className='mt-40 mb-10'>
+          <Link to={"/admin_panel"} className='ml-5 border-2 border-black p-2 rounded-lg w-60 text-white bg-black hover:bg-white hover:text-black ease-out duration-300 '>Loguearse como admin</Link>
+          </div>
+      
+    </>
   )
 }
 

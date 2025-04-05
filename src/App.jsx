@@ -8,6 +8,7 @@ import Notes from './pages/Notes'
 import NoteDetails from './pages/NoteDetails'
 import ArchivedNotes from './pages/ArchivedNotes'
 import Authentication from './pages/Authentication'
+import AdminPanel from './pages/AdminPanel'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
       <Route path='/login' element={<Authentication></Authentication>}></Route>
       <Route path='/notes/:id' element={<NoteDetails></NoteDetails>}></Route>
       <Route path='/archived' element={<ArchivedNotes></ArchivedNotes>}></Route>
+      <Route path='/admin_panel' element={<AdminPanel></AdminPanel>}></Route>
    </Routes>
 
   )
