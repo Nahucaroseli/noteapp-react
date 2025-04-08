@@ -6,22 +6,54 @@ function AdminPanel() {
 
     const {users} = useContext(UsuarioContext);
     const {totalNotes} = useContext(NoteContext)
+    const [option,setOption] = useState("Dashboard")
+    const [HTMLUsersList,setHTMLUsersList] = useState("");
     const [HTMLUsers,setHTMLUsers] = useState("");
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
 
     useEffect(()=>{
 
-      const html = users.map((user)=>(
+      const htmlList = users.map((user)=>(
         <TableRow key={user.id} id={user.id} username={user.username}></TableRow>
       ))
-      setHTMLUsers(html)
+      const htmlUSers = users.map((user) =>(
+        <>
+
+        <div className='flex flex-col'>
+        <h1>{user.username}</h1>
+        <div className='flex flex-row gap-x-5 flex-wrap gap-y-5'>
+          <div className='flex flex-col bg-orange-300 w-60 h-60 gap-y-4 text-black rounded-2xl ease-out duration-300 hover:shadow hover:shadow-xl cursor-pointer'>
+            <h1 className='text-xl ml-3 mt-4 font-bold'>En construccion</h1>
+            <h1 className='text-xl ml-3 w-48 h-60 overflow-hidden ... font-bold'>no terminado</h1>
+          </div>
+          <div className='flex flex-col bg-orange-300 w-60 h-60 gap-y-4 text-black rounded-2xl ease-out duration-300 hover:shadow hover:shadow-xl cursor-pointer'>
+          <h1 className='text-xl ml-3 mt-4 font-bold'>En construccion</h1>
+          <h1 className='text-xl ml-3 w-48 h-60 overflow-hidden ... font-bold'>no terminado</h1>
+          </div>
+          <div className='flex flex-col bg-orange-300 w-60 h-60 gap-y-4 text-black rounded-2xl ease-out duration-300 hover:shadow hover:shadow-xl cursor-pointer'>
+          <h1 className='text-xl ml-3 mt-4 font-bold'>En construccion</h1>
+          <h1 className='text-xl ml-3 w-48 h-60 overflow-hidden ... font-bold'>no terminado</h1>
+          </div>
+          <div className='flex flex-col bg-orange-300 w-60 h-60 gap-y-4 text-black rounded-2xl ease-out duration-300 hover:shadow hover:shadow-xl cursor-pointer'>
+          <h1 className='text-xl ml-3 mt-4 font-bold'>En construccion</h1>
+          <h1 className='text-xl ml-3 w-48 h-60 overflow-hidden ... font-bold'>no terminado</h1>
+          </div>
+          </div>
+        </div>
+        </>
+      ))
+      setHTMLUsers(htmlUSers)
+
+      setHTMLUsersList(htmlList)
     },[users,totalNotes])
+
+
 
 
     return (
       <div className="min-h-screen flex flex-col md:flex-row bg-gray-100">
-        {/* Sidebar */}
+
         <aside
           className={`fixed md:static top-0 left-0 h-full w-64 bg-black text-white transform ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -29,13 +61,13 @@ function AdminPanel() {
         >
           <h2 className="text-2xl font-bold text-center mb-4">Admin Panel</h2>
           <nav className="flex flex-col space-y-2">
-            <a href="#" className="hover:bg-gray-700 rounded px-3 py-2">
+            <a href="#" onClick={(e)=>{setOption("Dashboard"); e.preventDefault();}} className="hover:bg-gray-700 rounded px-3 py-2">
               Dashboard
             </a>
             <a href="#" className="hover:bg-gray-700 rounded px-3 py-2">
               Usuarios
             </a>
-            <a href="#" className="hover:bg-gray-700 rounded px-3 py-2">
+            <a href="#" onClick={(e)=>{setOption("Notes"); e.preventDefault();}} className="hover:bg-gray-700 rounded px-3 py-2">
               Notas
             </a>
             <a href="#" className="hover:bg-gray-700 rounded px-3 py-2">
@@ -47,7 +79,7 @@ function AdminPanel() {
           </nav>
         </aside>
   
-        {/* Overlay en mobile */}
+
         {sidebarOpen && (
           <div
             onClick={() => setSidebarOpen(false)}
@@ -55,10 +87,10 @@ function AdminPanel() {
           />
         )}
   
-        {/* Contenido principal */}
+
         <div className="flex-1 flex flex-col">
-          {/* Navbar */}
-          <header className="bg-white shadow p-4 flex justify-between items-center md:sticky top-0 z-30">
+
+          <header className="bg-white shadow p-4 flex justify-between items-center sticky md:static top-0 z-30">
             <div className="flex items-center gap-4">
               <button
                 className="md:hidden"
@@ -87,29 +119,33 @@ function AdminPanel() {
               />
             </div>
           </header>
-  
-          {/* Main */}
+
           <main className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               <Card title="Usuarios" value={users.length} />
               <Card title="Notas" value={totalNotes} />
             </div>
-  
-            {/* Tabla */}
+            {option == "Dashboard" && 
             <div className="bg-white p-4 shadow rounded-xl overflow-x-auto">
-              <h2 className="text-xl font-semibold mb-4">Usuarios</h2>
-              <table className="w-full text-left text-sm">
-                <thead>
-                  <tr className="border-b">
-                    <th className="py-2">N°</th>
-                    <th className="py-2">Nombre de Usuario</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {HTMLUsers}
-                </tbody>
-              </table>
-            </div>
+            <h2 className="text-xl font-semibold mb-4">Usuarios</h2>
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b">
+                  <th className="py-2">N°</th>
+                  <th className="py-2">Nombre de Usuario</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {HTMLUsersList}
+              </tbody>
+            </table>
+          </div>}
+          <div className='flex flex-row flex-wrap gap-x-6 gap-y-6'>
+              {option == "Notes" &&
+              
+            HTMLUsers
+              }
+          </div>
           </main>
         </div>
       </div>
@@ -130,6 +166,8 @@ function AdminPanel() {
       <td><button className='hover:text-red-500'>Eliminar</button></td>
     </tr>
   );
+
+
 
 
 export default AdminPanel

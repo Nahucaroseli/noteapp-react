@@ -16,7 +16,7 @@ function ArchivedNotes() {
         ));
         console.log(html);
         if(html.length === 0){
-            setHTMLNotes(<h1 className='font-bold'>You don't have any archived notes</h1>);
+            setHTMLNotes(<h1 className='font-bold'>No tienes notas archivadas</h1>);
         }else{
             setHTMLNotes(html);
         }
@@ -31,7 +31,7 @@ function ArchivedNotes() {
           Volver
     </Link>
     <div className='flex flex-col mt-10 text-black ml-6 gap-y-10 overflow-hidden'>
-        <h1 className=' text-5xl font-mono font-bold'>Archived notes</h1>
+        <h1 className=' text-5xl font-mono font-bold'>Notas Archivadas</h1>
         <div className='flex flex-row flex-wrap gap-x-5 gap-y-5'>
             {HTMLNotes}
         </div>

@@ -31,7 +31,7 @@ function Navbar() {
             </div>
 
             <Link to={"/archived"} className='ml-5'>
-                <button className='mt-3 mr-3 text-xl'>archived notes</button>
+                <button className='mt-3 mr-3 text-xl'>archivadas</button>
               </Link>
           </div>
 
