@@ -1,5 +1,18 @@
 const API = import.meta.env.VITE_API;
 
+
+
+export const getUsers = async() =>{
+    try{
+        const response = await fetch(API+"/users")
+
+        return response.json();
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
 export const logIn = async (user)=>{
     try {
         const response = await fetch(API+"/users/login",{

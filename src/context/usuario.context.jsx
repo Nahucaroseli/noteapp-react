@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import useUsers from "../hooks/useUsers";
 
 const UsuarioContext = createContext();
 
@@ -7,6 +8,8 @@ const UsuarioContext = createContext();
 function UsuarioContextWrapper(props){
 
     const [user,setUser] = useState(localStorage.getItem("username"));
+
+    const [users,setUsers] = useUsers();
 
     const setNewUser = ()=>{
         setUser(localStorage.getItem("username"));
@@ -18,7 +21,7 @@ function UsuarioContextWrapper(props){
 
 
     return (
-        <UsuarioContext.Provider value={{user,setNewUser,logoutUser}}>
+        <UsuarioContext.Provider value={{user,setNewUser,logoutUser,users,setUsers}}>
             {props.children}
 
         </UsuarioContext.Provider>

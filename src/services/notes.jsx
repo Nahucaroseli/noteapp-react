@@ -12,6 +12,16 @@ export const getNotes = async ()=>{
     }
 };
 
+export const getNotesTotal = async ()=>{
+    try {
+        const response = await fetch(API+"/notes/total");
+        const data = response.json();
+        return data;  
+    } catch (error) {
+            console.log(error);
+    }
+};
+
 export const getNoteById = async (id)=>{
 
     try {

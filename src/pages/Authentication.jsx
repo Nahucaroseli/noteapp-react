@@ -5,7 +5,7 @@ import { UsuarioContext } from '../context/usuario.context';
 
 function Authentication() {
 
-    const {setNewUser} = useContext(UsuarioContext);
+    const {setNewUser,setUsers,users} = useContext(UsuarioContext);
     const [username, setUserName] = useState("");
     const [password, setPass] = useState("");
     const [usernameRegister, setUserNameRegister] = useState("");
@@ -27,7 +27,7 @@ function Authentication() {
         localStorage.setItem("username",usernameRegister);
         localStorage.setItem("user_id",newUser.id)
         setNewUser();
-
+        setUsers([...users,newUser])
         navigate("/")
       }
 

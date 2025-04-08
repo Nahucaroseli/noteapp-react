@@ -1,7 +1,23 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { UsuarioContext } from '../context/usuario.context';
+import { NoteContext } from '../context/note.context';
 
 function AdminPanel() {
+
+    const {users} = useContext(UsuarioContext);
+    const {totalNotes} = useContext(NoteContext)
+    const [HTMLUsers,setHTMLUsers] = useState("");
     const [sidebarOpen, setSidebarOpen] = useState(false);
+
+
+    useEffect(()=>{
+
+      const html = users.map((user)=>(
+        <TableRow key={user.id} id={user.id} username={user.username}></TableRow>
+      ))
+      setHTMLUsers(html)
+    },[users,totalNotes])
+
 
     return (
       <div className="min-h-screen flex flex-col md:flex-row bg-gray-100">
@@ -75,8 +91,8 @@ function AdminPanel() {
           {/* Main */}
           <main className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-              <Card title="Usuarios" value="150" />
-              <Card title="Notas" value="23" />
+              <Card title="Usuarios" value={users.length} />
+              <Card title="Notas" value={totalNotes} />
             </div>
   
             {/* Tabla */}
@@ -85,15 +101,12 @@ function AdminPanel() {
               <table className="w-full text-left text-sm">
                 <thead>
                   <tr className="border-b">
-                    <th className="py-2">Nombre</th>
-                    <th className="py-2">Email</th>
+                    <th className="py-2">N°</th>
+                    <th className="py-2">Nombre de Usuario</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <TableRow
-                    name="Juan Pérez"
-                    email="juan@example.com"
-                  />
+                    {HTMLUsers}
                 </tbody>
               </table>
             </div>
@@ -110,10 +123,11 @@ function AdminPanel() {
     </div>
   );
   
-  const TableRow = ({ name, email, role }) => (
+  const TableRow = ({ id, username }) => (
     <tr className="border-b hover:bg-gray-50">
-      <td className="py-2">{name}</td>
-      <td className="py-2">{email}</td>
+      <td className="py-2">{id}</td>
+      <td className="py-2">{username}</td>
+      <td><button className='hover:text-red-500'>Eliminar</button></td>
     </tr>
   );
 
