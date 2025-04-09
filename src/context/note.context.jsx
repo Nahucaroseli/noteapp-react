@@ -71,7 +71,7 @@ function NoteContextWrapper(props) {
 
 
   return (
-    <NoteContext.Provider value={{notes,setNotes,addNote,removeNote,archiveNote,editNote,totalNotes}}>
+    <NoteContext.Provider value={{notes,setNotes,addNote,removeNote,archiveNote,editNote,totalNotes,setTotalNotes}}>
         {props.children}
     </NoteContext.Provider>
   )

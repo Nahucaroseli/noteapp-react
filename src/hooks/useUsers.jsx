@@ -12,7 +12,6 @@ function useUsers(){
                     const response = await getUsers();
                     const data = response;
                     setUsers(data);
-                    console.log(data)
                 } catch (error) {   
                     console.log("Error",error);
                 }

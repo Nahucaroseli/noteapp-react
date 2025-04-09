@@ -13,6 +13,19 @@ export const getUsers = async() =>{
     }
 }
 
+export const deleteUserById = async (id)=>{
+    try {
+        const response = await fetch(API+"/users/"+id,{
+            method: 'DELETE'
+        })
+        console.log(response)
+        return response.json();
+
+    } catch (error) {
+        
+    }
+}
+
 export const logIn = async (user)=>{
     try {
         const response = await fetch(API+"/users/login",{

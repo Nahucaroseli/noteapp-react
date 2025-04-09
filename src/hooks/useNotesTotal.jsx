@@ -10,7 +10,6 @@ function useNotesTotal(){
                     const response = await getNotesTotal();
                     const data = response;
                     setTotal(data);
-                    console.log(data)
                 } catch (error) {   
                     console.log("Error",error);
                 }

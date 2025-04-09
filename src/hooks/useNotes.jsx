@@ -22,9 +22,7 @@ function useNotes() {
         }
       
 
-
     },[user]);
-    console.log(notes);
     return [notes,setNotes];
 }
 

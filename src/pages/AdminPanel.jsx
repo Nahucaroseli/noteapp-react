@@ -1,22 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UsuarioContext } from '../context/usuario.context';
 import { NoteContext } from '../context/note.context';
+import { getNotesTotal } from '../services/notes';
+
 
 function AdminPanel() {
 
-    const {users} = useContext(UsuarioContext);
-    const {totalNotes} = useContext(NoteContext)
+    const {users,deleteUser} = useContext(UsuarioContext);
+    const {totalNotes,setTotalNotes} = useContext(NoteContext)
     const [option,setOption] = useState("Dashboard")
-    const [HTMLUsersList,setHTMLUsersList] = useState("");
     const [HTMLUsers,setHTMLUsers] = useState("");
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
-
     useEffect(()=>{
 
-      const htmlList = users.map((user)=>(
-        <TableRow key={user.id} id={user.id} username={user.username}></TableRow>
-      ))
       const htmlUSers = users.map((user) =>(
         <>
 
@@ -45,17 +42,21 @@ function AdminPanel() {
       ))
       setHTMLUsers(htmlUSers)
 
-      setHTMLUsersList(htmlList)
     },[users,totalNotes])
 
 
+    const deleteUserById = async (id)=>{
+      deleteUser(id);
+      const notes = await getNotesTotal();
+      setTotalNotes(notes);
+  }
 
 
     return (
       <div className="min-h-screen flex flex-col md:flex-row bg-gray-100">
 
         <aside
-          className={`fixed md:static top-0 left-0 h-full w-64 bg-black text-white transform ${
+          className={` top-0 left-0 fixed md:static w-64 bg-black text-white transform ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           } md:translate-x-0 transition-transform duration-200 z-50 p-4 space-y-6`}
         >
@@ -136,7 +137,9 @@ function AdminPanel() {
                 </tr>
               </thead>
               <tbody>
-                  {HTMLUsersList}
+              {users.map((user) => (
+                    <TableRow key={user.id} id={user.id} username={user.username} onDelete={deleteUserById} />
+              ))}
               </tbody>
             </table>
           </div>}
@@ -159,11 +162,11 @@ function AdminPanel() {
     </div>
   );
   
-  const TableRow = ({ id, username }) => (
+  const TableRow = ({ id, username, onDelete }) => (
     <tr className="border-b hover:bg-gray-50">
       <td className="py-2">{id}</td>
       <td className="py-2">{username}</td>
-      <td><button className='hover:text-red-500'>Eliminar</button></td>
+      <td><button onClick={(e)=>{e.preventDefault(); onDelete(id) }} className='hover:text-red-500'>Eliminar</button></td>
     </tr>
   );
 
