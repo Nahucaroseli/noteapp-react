@@ -14,7 +14,6 @@ function ArchivedNotes() {
         .map(note => (
             <NoteCard key={note.id} noteCard={note}></NoteCard>
         ));
-        console.log(html);
         if(html.length === 0){
             setHTMLNotes(<h1 className='font-bold'>No tienes notas archivadas</h1>);
         }else{

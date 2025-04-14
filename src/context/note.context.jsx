@@ -24,7 +24,7 @@ function NoteContextWrapper(props) {
     const removeNote = async (noteId) =>{
       const note = notes.find(note => note.id === noteId);
       if(note){
-        deleteFromNotes(noteId)
+        await deleteFromNotes(noteId)
         setNotes(notes.filter((item)=>{
           return item !== note;
         }));

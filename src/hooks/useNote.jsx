@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react'
-import { getNoteById, getNotes } from '../services/notes';
+import { getNoteById, getNotesByUser } from '../services/notes';
 
 function useNote(id) {
 

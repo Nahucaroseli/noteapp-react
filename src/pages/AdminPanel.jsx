@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UsuarioContext } from '../context/usuario.context';
 import { NoteContext } from '../context/note.context';
-import { getNotesTotal } from '../services/notes';
+import { getNotes, getNotesTotal } from '../services/notes';
 
 
 function AdminPanel() {
@@ -9,38 +9,18 @@ function AdminPanel() {
     const {users,deleteUser} = useContext(UsuarioContext);
     const {totalNotes,setTotalNotes} = useContext(NoteContext)
     const [option,setOption] = useState("Dashboard")
-    const [HTMLUsers,setHTMLUsers] = useState("");
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [userNotes,setUserNotes] = useState([]);
+
+
 
     useEffect(()=>{
+      let fetchNotes = async ()=>{
+        let notes = await getNotes();
 
-      const htmlUSers = users.map((user) =>(
-        <>
-
-        <div className='flex flex-col'>
-        <h1>{user.username}</h1>
-        <div className='flex flex-row gap-x-5 flex-wrap gap-y-5'>
-          <div className='flex flex-col bg-orange-300 w-60 h-60 gap-y-4 text-black rounded-2xl ease-out duration-300 hover:shadow hover:shadow-xl cursor-pointer'>
-            <h1 className='text-xl ml-3 mt-4 font-bold'>En construccion</h1>
-            <h1 className='text-xl ml-3 w-48 h-60 overflow-hidden ... font-bold'>no terminado</h1>
-          </div>
-          <div className='flex flex-col bg-orange-300 w-60 h-60 gap-y-4 text-black rounded-2xl ease-out duration-300 hover:shadow hover:shadow-xl cursor-pointer'>
-          <h1 className='text-xl ml-3 mt-4 font-bold'>En construccion</h1>
-          <h1 className='text-xl ml-3 w-48 h-60 overflow-hidden ... font-bold'>no terminado</h1>
-          </div>
-          <div className='flex flex-col bg-orange-300 w-60 h-60 gap-y-4 text-black rounded-2xl ease-out duration-300 hover:shadow hover:shadow-xl cursor-pointer'>
-          <h1 className='text-xl ml-3 mt-4 font-bold'>En construccion</h1>
-          <h1 className='text-xl ml-3 w-48 h-60 overflow-hidden ... font-bold'>no terminado</h1>
-          </div>
-          <div className='flex flex-col bg-orange-300 w-60 h-60 gap-y-4 text-black rounded-2xl ease-out duration-300 hover:shadow hover:shadow-xl cursor-pointer'>
-          <h1 className='text-xl ml-3 mt-4 font-bold'>En construccion</h1>
-          <h1 className='text-xl ml-3 w-48 h-60 overflow-hidden ... font-bold'>no terminado</h1>
-          </div>
-          </div>
-        </div>
-        </>
-      ))
-      setHTMLUsers(htmlUSers)
+        setUserNotes(notes);
+      }
+      fetchNotes();
 
     },[users,totalNotes])
 
@@ -143,10 +123,28 @@ function AdminPanel() {
               </tbody>
             </table>
           </div>}
-          <div className='flex flex-row flex-wrap gap-x-6 gap-y-6'>
-              {option == "Notes" &&
+          <div className='flex flex-col flex-wrap gap-x-6 gap-y-6'>
+              {option == "Notes" && userNotes.length != 0 &&
               
-            HTMLUsers
+              users.map((user) =>(
+                <div key={user.id} className='flex flex-col'>
+                <h1 className='text-2xl'>{user.username}</h1>
+                <div  className='flex flex-row gap-x-5 flex-wrap gap-y-5'>
+  
+                  {userNotes.filter(note => note.usuario.id == user.id)
+                  .map((note) =>(
+                    <div key={note.id} className='mt-5 flex flex-col bg-orange-300 w-60 h-60 gap-y-4 text-black rounded-2xl ease-out duration-300 hover:shadow hover:shadow-xl cursor-pointer'>
+                      <h1 className='text-xl ml-3 mt-4 font-bold'>{note.title}</h1>
+                      <h1 className='text-xl ml-3 w-48 h-60 overflow-hidden ... font-bold'>{note.description}</h1>
+                    </div> 
+                  ))}
+                  </div>
+                </div>
+                
+              ))
+              }
+              {userNotes.length == 0 && option == "Notes" &&
+                  <h1>No hay notas</h1>
               }
           </div>
           </main>

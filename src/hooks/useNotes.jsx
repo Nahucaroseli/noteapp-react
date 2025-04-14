@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState} from 'react'
-import { getNotes } from '../services/notes';
+import { getNotesByUser } from '../services/notes';
 import { UsuarioContext } from '../context/usuario.context';
 
 function useNotes() {
@@ -11,7 +11,7 @@ function useNotes() {
         if(user){
             const fetchProducts = async ()=>{
                 try {
-                    const response = await getNotes();
+                    const response = await getNotesByUser();
                     const data = response;
                     setNotes(data);
                 } catch (error) {   
